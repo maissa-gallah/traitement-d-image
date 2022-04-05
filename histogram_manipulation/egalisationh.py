@@ -1,0 +1,21 @@
+import numpy as np
+import sys
+sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
+from read_write_histogram.histogram import histogram, histogramcumul
+def egalisation(img,lx,ly):
+    k=img.max()
+    h=histogram(img,lx,ly)
+    hc=histogramcumul(h,k)
+    max=hc[k]
+    hc=np.array(hc)
+    n1 = np.trunc(k * hc/max)
+    print("n1=",n1)
+    heg=[0 for i in range (img.max() +1)]
+    for i in range (img.max() +1):
+        for j in range (img.max() +1):
+            if n1[j]== i:
+                heg[i]+=h[j]
+    return heg
+
+
+
