@@ -3,17 +3,17 @@ import cv2 as cv
 import sys
 
 
-sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
+sys.path.append("C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/")
 
 from filtre_moyen_filtre_median.bruit import bruit
 from read_write_histogram.writePGM import pgmwrite
 from  read_write_histogram.readPGM import readpgm
-from filtre_moyen_filtre_median.filtre import moyennefilter
-path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
+from filtre_moyen_filtre_median.filtre import medianFiltre, moyennefilter
+path="C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/images/"
 
-img1 = cv.imread(path+'example.pgm') 
+img1 = cv.imread(path+'coins.pgm') 
 cv.imshow("Test", img1)
-img,lx,ly=readpgm(path+'example.pgm')
+img,lx,ly=readpgm(path+'coins.pgm')
 imgb=bruit(img,lx,ly)
 
 pgmwrite(imgb, path+"bruit.pgm",lx,ly)
@@ -24,6 +24,12 @@ imgm=moyennefilter(img,lx,ly,5)
 pgmwrite(imgm, path+"filtermoyenne.pgm",lx,ly)
 imgfiltermoy = cv.imread(path+"filtermoyenne.pgm") 
 cv.imshow("filtermoyenne.pgm", imgfiltermoy)
+
+new_img = medianFiltre(imgb,lx,ly,3)
+
+pgmwrite(new_img, path+"new_img.pgm",lx,ly)
+new_img_file = cv.imread(path+"new_img.pgm") 
+cv.imshow("Median Filter", new_img_file)
 
 
 cv.waitKey()
