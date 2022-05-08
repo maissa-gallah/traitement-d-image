@@ -1,35 +1,35 @@
 import cv2 as cv
 import sys
-sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
-from  read_write_histogram.readPGM import readpgm
-from read_write_histogram.writePGM import pgmwrite
+sys.path.append("C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/")
+from  read_write_histogram.readPGM import readPGM
+from read_write_histogram.writePGM import writePGM
 from modificationcontraste import contraste
 
-path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
+path="C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/images/"
 
 
 img1 = cv.imread(path+'example.pgm') 
 cv.imshow("Test", img1)
 
-img,lx,ly=readpgm(path+'example.pgm')
+img,lx,ly=readPGM(path+'example.pgm')
 
 imgclair=contraste(img,lx,ly,[70,50],[120,100])
-pgmwrite(imgclair, path+ "dilatationzoneclair.pgm",lx,ly,"P2")
+writePGM(imgclair, path+ "dilatationzoneclair.pgm",lx,ly, "P2")
 imgclair = cv.imread(path+ "dilatationzoneclair.pgm") 
 cv.imshow("dilatationzoneclair.pgm", imgclair)
 
 imgsombre=contraste(img,lx,ly,[50,200],[200,240])
-pgmwrite(imgsombre, path+"dilatationzonesombre.pgm",lx,ly,"P2")
+writePGM(imgsombre, path+"dilatationzonesombre.pgm",lx,ly, "P2")
 imgsombre = cv.imread(path+"dilatationzonesombre.pgm") 
 cv.imshow("dilatationzonesombre.pgm", imgsombre)
 
 imgmilieu=contraste(img,lx,ly,[50,200],[200,240])
-pgmwrite(imgsombre, path+ "dilatationzonesmilieu.pgm",lx,ly,"P2")
+writePGM(imgsombre, path+ "dilatationzonesmilieu.pgm",lx,ly, "P2")
 imgmilieu = cv.imread(path+"dilatationzonemilieu.pgm") 
 cv.imshow("dilatationzonemilieu.pgm", imgsombre)
 
 imginverse=contraste(img,lx,ly,[1,255],[254,0])
-pgmwrite(imginverse, path+ "inversionimage.pgm",lx,ly,"P2")
+writePGM(imginverse, path+ "inversionimage.pgm",lx,ly, "P2")
 imginverse = cv.imread(path+ "inversionimage.pgm") 
 cv.imshow("inversionimage.pgm", imginverse)
 

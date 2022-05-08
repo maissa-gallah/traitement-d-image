@@ -2,12 +2,11 @@ import cv2 as cv
 import numpy as np
 import sys
 
-sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
+sys.path.append("C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/")
 
-path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
-
+path="C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/images/"
+from histogram import histogram
 from read_write_histogram.histogram import histogram as histo
-from Thresholding.histogram  import histogram 
 
 def otsu(img):
     
@@ -28,7 +27,7 @@ def otsu(img):
 
         return [th0, th1, th2]
     else :
-        ly,lx = img.shape
+        (ly,lx) = img.shape
         hist = histo(img, lx, ly)
         N = ly*lx 
         hist = [hist[i] / N for i in range(256)]

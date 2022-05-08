@@ -1,17 +1,17 @@
 
 from statistics import variance
 from histogram import histogram, histogramcumul
-from readPGM import readpgm
-from writePGM import pgmwrite
+from readPGM import readPGM
+from writePGM import writePGM
 import numpy 
 import math
 
-path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
+path="C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/images/"
 
-print(readpgm(path+"cours.pgm"))
-img , lx ,ly =readpgm(path+"cours.pgm")
+print(readPGM(path+"cours.pgm"))
+img , lx ,ly =readPGM(path+"cours.pgm")
 maxVal=img.max()
-pgmwrite(img, path+"td.pgm",lx,ly,"P2")
+writePGM(img, path+"td.pgm",lx,ly, "P2")
 moyenne = numpy.mean(img)
 variance = numpy.var(img)
 print("moyenne=",moyenne)

@@ -1,8 +1,8 @@
 import random
-
+import numpy as np
 
 def bruit(img,lx,ly):
-  imgb =img
+  imgb = np.copy(img)
   for i in range (ly):
         for j in range (lx):
             c=random.randint(0, 20)

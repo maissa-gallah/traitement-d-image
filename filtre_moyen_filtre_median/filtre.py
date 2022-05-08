@@ -1,6 +1,6 @@
 import numpy as np
 def remplirbourdureimg(img,lx,ly,n):
-    imgb =img
+    imgb =np.copy(img)
     a=n//2
     t=np.zeros((ly+n-1,lx+n-1))
     t[a:ly+a , a:lx+a]=img
@@ -17,8 +17,8 @@ def remplirbourdureimg(img,lx,ly,n):
 def moyennefilter(img,lx,ly,n):
     t =remplirbourdureimg(img,lx,ly,n)
     a=n//2
-    imgm=img
-    new_img=img
+    imgm=np.copy(img)
+
     for i in range (a,ly+a):
         for j in range(a,lx+a):
             arr=t[i-a:i+a+1,j-a:j+a+1]
@@ -26,7 +26,7 @@ def moyennefilter(img,lx,ly,n):
     return imgm
 
 def medianFiltre(img, lx, ly, n):
-    new_img = img
+    new_img = np.copy(img)
     a= n//2
     img_filled = remplirbourdureimg(img, lx, ly, n)
 

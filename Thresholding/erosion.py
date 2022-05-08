@@ -1,4 +1,3 @@
-
 import numpy as np
 from matplotlib import pyplot as plt
 import sys
@@ -7,13 +6,12 @@ sys.path.append("C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/trai
 from Thresholding.auto_threshholding import otsu
 from Thresholding.manual_thresholding import manual_threshholding
 
-def erode_this(img, erosion_level=3, with_plot=False):
-    imgn=np.copy(img)
+def erode_this(img, erosion_level=3):
     erosion_level = 3 if erosion_level < 3 else erosion_level
 
     structuring_kernel = np.full(shape=(erosion_level, erosion_level), fill_value=255)
-    th = otsu(imgn)
-    image_src = manual_threshholding(imgn, s=th)
+    th = otsu(img)
+    image_src = manual_threshholding(img, s=th)
 
     orig_shape = image_src.shape
     pad_width = erosion_level - 2
