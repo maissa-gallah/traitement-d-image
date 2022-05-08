@@ -11,7 +11,7 @@ path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
 print(readpgm(path+"cours.pgm"))
 img , lx ,ly =readpgm(path+"cours.pgm")
 maxVal=img.max()
-pgmwrite(img, path+"td.pgm",lx,ly)
+pgmwrite(img, path+"td.pgm",lx,ly,"P2")
 moyenne = numpy.mean(img)
 variance = numpy.var(img)
 print("moyenne=",moyenne)

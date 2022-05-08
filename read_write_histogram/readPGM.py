@@ -6,7 +6,7 @@ def readpgm(filename):
     # Read header info
     line = f.readline()
     magicNum = line.strip()
-    if magicNum != 'P2' and magicNum != 'P5':
+    if magicNum != 'P2' and magicNum != 'P5' and magicNum != 'P3' and magicNum != 'P6':
         f.close()
         print ('Not a valid PGM file')
         exit()

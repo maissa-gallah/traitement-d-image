@@ -16,18 +16,18 @@ cv.imshow("Test", img1)
 img,lx,ly=readpgm(path+'coins.pgm')
 imgb=bruit(img,lx,ly)
 
-pgmwrite(imgb, path+"bruit.pgm",lx,ly)
+pgmwrite(imgb, path+"bruit.pgm",lx,ly,"P2")
 imgbruit = cv.imread(path+"bruit.pgm") 
 cv.imshow("bruit.pgm", imgbruit)
 
 imgm=moyennefilter(img,lx,ly,5)
-pgmwrite(imgm, path+"filtermoyenne.pgm",lx,ly)
+pgmwrite(imgm, path+"filtermoyenne.pgm",lx,ly,"P2")
 imgfiltermoy = cv.imread(path+"filtermoyenne.pgm") 
 cv.imshow("filtermoyenne.pgm", imgfiltermoy)
 
 new_img = medianFiltre(imgb,lx,ly,3)
 
-pgmwrite(new_img, path+"new_img.pgm",lx,ly)
+pgmwrite(new_img, path+"new_img.pgm",lx,ly,"P2")
 new_img_file = cv.imread(path+"new_img.pgm") 
 cv.imshow("Median Filter", new_img_file)
 

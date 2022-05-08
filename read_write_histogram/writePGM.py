@@ -1,10 +1,10 @@
 from numpy import array, int32
 
-def pgmwrite(img, filename,lx,ly):
+def pgmwrite(img, filename,lx,ly,format):
   maxVal=img.max()
   img = int32(img).tolist()
-  f = open(filename,'w')
-  f.write("P2" + '\n')
+  f = open(filename,'w',newline='\n')
+  f.write(format + '\n')
   f.write(str(lx) + ' ' + str(ly) + '\n')
   f.write(str(maxVal) + '\n')
   for i in range(ly):
@@ -20,3 +20,5 @@ def pgmwrite(img, filename,lx,ly):
         count = count + 1
     f.write('\n')
   f.close()
+
+ 

@@ -14,22 +14,22 @@ cv.imshow("Test", img1)
 img,lx,ly=readpgm(path+'example.pgm')
 
 imgclair=contraste(img,lx,ly,[70,50],[120,100])
-pgmwrite(imgclair, path+ "dilatationzoneclair.pgm",lx,ly)
+pgmwrite(imgclair, path+ "dilatationzoneclair.pgm",lx,ly,"P2")
 imgclair = cv.imread(path+ "dilatationzoneclair.pgm") 
 cv.imshow("dilatationzoneclair.pgm", imgclair)
 
 imgsombre=contraste(img,lx,ly,[50,200],[200,240])
-pgmwrite(imgsombre, path+"dilatationzonesombre.pgm",lx,ly)
+pgmwrite(imgsombre, path+"dilatationzonesombre.pgm",lx,ly,"P2")
 imgsombre = cv.imread(path+"dilatationzonesombre.pgm") 
 cv.imshow("dilatationzonesombre.pgm", imgsombre)
 
 imgmilieu=contraste(img,lx,ly,[50,200],[200,240])
-pgmwrite(imgsombre, path+ "dilatationzonesmilieu.pgm",lx,ly)
+pgmwrite(imgsombre, path+ "dilatationzonesmilieu.pgm",lx,ly,"P2")
 imgmilieu = cv.imread(path+"dilatationzonemilieu.pgm") 
 cv.imshow("dilatationzonemilieu.pgm", imgsombre)
 
 imginverse=contraste(img,lx,ly,[1,255],[254,0])
-pgmwrite(imginverse, path+ "inversionimage.pgm",lx,ly)
+pgmwrite(imginverse, path+ "inversionimage.pgm",lx,ly,"P2")
 imginverse = cv.imread(path+ "inversionimage.pgm") 
 cv.imshow("inversionimage.pgm", imginverse)
 
