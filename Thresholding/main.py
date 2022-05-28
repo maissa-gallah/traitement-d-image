@@ -1,24 +1,19 @@
-
-
 import cv2 as cv
 import numpy as np
 import sys
 
+sys.path.append("C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/")
 
-
-sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
-
-from Thresholding.ouverture import ouverture
-from Thresholding.fermeture import fermeture
-from read_write_histogram.writePGM import pgmwrite
 from Thresholding.manual_thresholding import manual_threshholding
 from Thresholding.auto_threshholding import otsu
 from Thresholding.dilation import dilate_this
 from Thresholding.erosion import erode_this
-from read_write_histogram.readPGM import readpgm
+from Thresholding.ouverture import ouverture
+from Thresholding.fermeture import fermeture
+from read_write_histogram.readPGM import readPGM
+from read_write_histogram.writePGM import writePGM
 
-
-path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
+path="C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/images/"
 
 #---------------------------------------------------------- Manual threshholding
 img = cv.imread(path+'snail.ppm') 
@@ -36,35 +31,36 @@ cv.imshow("M Th", new_img)
 [th0, th1, th2] = otsu(img)
 print(th0," ", th1," ", th2) # 129   142   162
 img2 = manual_threshholding(img, th2, th1, th0 )
-cv.imshow("tesssst", img2)
+cv.imshow("Auto th", img2)
 
-#---------------------------------------------------------- Dilatation
-image_src, lx, ly = readpgm(path+'coins.pgm')
+#---------------------------------------------------------- 
+image_src, lx, ly = readPGM(path+'coins.pgm')
 
-image_org = cv.imread(path+ "coins.pgm") 
-cv.imshow("image source", image_org)
 
-img_d = dilate_this(image_src, dilation_level=9, with_plot=True)
-pgmwrite(img_d, path+ "dilated.pgm",lx,ly,"P2")
-dilated = cv.imread(path+ "dilated.pgm") 
-cv.imshow("dilated.pgm", dilated)
+img_d = dilate_this(np.copy(image_src), dilation_level=3)
+writePGM(img_d,path+ "dilated.pgm",lx,ly,"P2")
+dilated_img = cv.imread(path+ "dilated.pgm")
+cv.imshow("Dilated ", dilated_img)
 
-#---------------------------------------------------------- erosion
-img_e = erode_this(image_src, 3, with_plot=True)
-pgmwrite(img_e, path+ "erosion.pgm",lx,ly,"P2")
-erosion = cv.imread(path+ "erosion.pgm") 
-cv.imshow("erosion.pgm", erosion)
+img_e = erode_this(np.copy(image_src), erosion_level=3)
+writePGM(img_e,path+ "eroded.pgm",lx,ly,"P2")
+eroded_img = cv.imread(path+ "eroded.pgm")
+cv.imshow("Eroded ", eroded_img)
 
-#---------------------------------------------------------- ouverture
-imgo = ouverture(image_src)
-pgmwrite(imgo, path+ "ouverture.pgm",lx,ly,"P2")
-imgouverture = cv.imread(path+ "ouverture.pgm") 
-cv.imshow("ouverture.pgm", imgouverture)
+img_o = ouverture(np.copy(image_src), 9)
+writePGM(img_o, path+ "ouverture.pgm",lx,ly,"P2")
+ouvert_img = cv.imread(path+ "ouverture.pgm")
+cv.imshow("Ouveture ", ouvert_img)
 
-#---------------------------------------------------------- fermeture
-imgf=fermeture(image_src)
-pgmwrite(imgf, path+ "fermeture.pgm",lx,ly,"P2")
-imgfermeture = cv.imread(path+ "fermeture.pgm") 
-cv.imshow("fermeture.pgm", imgfermeture)
+# Check idempotence
+#img_o2 = ouverture(np.copy(image_src), 9)
+#writePGM(img_o2, path+ "ouverture2.pgm",lx,ly,"P2")
+#ouvert_img2 = cv.imread(path+ "ouverture2.pgm")
+#cv.imshow("Ouveture2 ", ouvert_img2)
+
+img_f = fermeture(np.copy(image_src), 9)
+writePGM(img_f, path+ "fermeture.pgm",lx,ly,"P2")
+fermeture_img = cv.imread(path+ "fermeture.pgm")
+cv.imshow("Fermeture ", fermeture_img)
 
 cv.waitKey()

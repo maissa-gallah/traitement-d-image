@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
+
 from read_write_histogram.histogram import histogram, histogramcumul
 def egalisation(img,lx,ly):
     k=img.max()

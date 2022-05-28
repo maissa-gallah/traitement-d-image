@@ -8,15 +8,14 @@ sys.path.append("C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/trai
 from Thresholding.auto_threshholding import otsu
 from Thresholding.manual_thresholding import manual_threshholding
 
-def dilate_this(img, dilation_level=3, with_plot=False):
-    imgn=np.copy(img)
+def dilate_this(img, dilation_level=3):
     # setting the dilation_level
     dilation_level = 3 if dilation_level < 3 else dilation_level
     
     # obtain the kernel by the shape of (dilation_level, dilation_level)
     structuring_kernel = np.full(shape=(dilation_level, dilation_level), fill_value=255)
-    th = otsu( imgn)
-    image_src = manual_threshholding( imgn, s=th)
+    th = otsu(img)
+    image_src = manual_threshholding(img, s=th)
 
     orig_shape = image_src.shape
     pad_width = dilation_level - 2
@@ -36,5 +35,5 @@ def dilate_this(img, dilation_level=3, with_plot=False):
     image_dilate = np.array([255 if (i == structuring_kernel).any() else 0 for i in flat_submatrices])
     # obtain new matrix whose shape is equal to the original image size
     image_dilate = image_dilate.reshape(orig_shape)
-               
+    
     return image_dilate
