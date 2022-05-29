@@ -7,10 +7,13 @@ import threading
 import webbrowser
 import sys
 
+
+
 sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps")
 
 from  read_write_histogram.readPGM import readPGM
 from filtre_moyen_filtre_median.bruit import bruit
+from read_write_histogram.writePGM import writePGM
 
 tk = Tk()
 windowWidth = tk.winfo_reqwidth()
@@ -83,210 +86,7 @@ v8 = DoubleVar()
 v9 = DoubleVar()
 v10 = DoubleVar()
 v11 = DoubleVar()
-def updateValue(event):
-    global k_picture
-    global orjn
 
-    saveBTN.config(state="disabled",cursor="")
-
-    low = np.array([l_h.get(), l_s.get(), l_v.get()])
-    high = np.array([u_h.get(), u_s.get(), u_v.get()])
-
-    k_picture = cv2.inRange(hsv, low, high)
-    orjn = cv2.inRange(original, low, high)
-
-    imgtk3 = ImageTk.PhotoImage(image=Image.fromarray(k_picture))
-    LabelHSV["text"] = ([l_h.get(),l_s.get(),l_v.get()],[u_h.get(),u_s.get(),u_v.get()])
-
-    L2 = Label(F1, image = imgtk3)
-    L2.image = imgtk3
-    L2.grid(row=1, column=1)
-
-    saveBTN.config(state="normal",cursor="hand2")
-
-def new_page():
-    global l_h
-    global l_s
-    global l_v
-    global u_h
-    global u_s
-    global u_v
-    global F2
-    global LabelHSV
-    if F3:
-        F3.grid_forget()
-        F3.destroy()
-    F2 = Frame(tk)
-    F2.place(x=900,y=50)
-    
-    l_h_lbl = Label(F2,text="Lower - H | Tone")
-    l_h_lbl.grid(row=0,column=0, sticky=W, padx="100")
-    l_h = Scale(F2, length=255,variable = v1, from_ = 0, to = 179, troughcolor="white", orient = HORIZONTAL)
-    l_h.bind("<ButtonRelease-1>", updateValue)
-    l_h.grid(row=1,column=0)
-    l_s_lbl = Label(F2,text="Lower - S | Saturation")
-    l_s_lbl.grid(row=2,column=0,sticky=W, padx="100")
-    l_s = Scale(F2, length=255,variable = v2, from_ = 0, to = 255, troughcolor="white", orient = HORIZONTAL)
-    l_s.bind("<ButtonRelease-1>", updateValue)
-    l_s.grid(row=3,column=0)
-    l_v_lbl = Label(F2,text="Lower - V | Value")
-    l_v_lbl.grid(row=4,column=0,sticky=W, padx="100")
-    l_v = Scale(F2, length=255,variable = v3, from_ = 0, to = 255, troughcolor="white",orient = HORIZONTAL)
-    l_v.bind("<ButtonRelease-1>", updateValue)
-    l_v.grid(row=5,column=0)
-
-    u_h_lbl = Label(F2,text="Upper - H | Tone")
-    u_h_lbl.grid(row=6,column=0, sticky=W, padx="100")
-    u_h = Scale(F2, length=255,variable = v4, from_ = 0, to = 179, troughcolor="red", orient = HORIZONTAL)
-    u_h.bind("<ButtonRelease-1>", updateValue)
-    u_h.grid(row=7,column=0)
-    u_s_lbl = Label(F2,text="Upper - S | Saturation")
-    u_s_lbl.grid(row=8,column=0,sticky=W, padx="100")
-    u_s = Scale(F2, length=255,variable = v5, from_ = 0, to = 255, troughcolor="red", orient = HORIZONTAL)
-    u_s.bind("<ButtonRelease-1>", updateValue)
-    u_s.grid(row=9,column=0)
-    u_v_lbl = Label(F2,text="Upper - V | Value")
-    u_v_lbl.grid(row=10,column=0,sticky=W, padx="100")
-    u_v = Scale(F2, length=255,variable = v6, from_ = 0, to = 255, troughcolor="red", orient = HORIZONTAL)
-    u_v.bind("<ButtonRelease-1>", updateValue)
-    u_v.grid(row=11,column=0)
-    reset = Button(F2, text ="Reset",font="bold",fg="white", width = 10, command = Reset, bg = "red")
-    reset.config(cursor="hand2")
-    reset.grid(row=13,column=0)
-
-    def Copy(event):
-        hsv_deger = [l_h.get(),l_s.get(),l_v.get()],[u_h.get(),u_s.get(),u_v.get()]
-        tk.clipboard_append(hsv_deger)
-        RecordMesajı = Label(F2, text="Copied.", font="bold", fg="red", width = 14,height=2)
-        RecordMesajı.grid(row=13,column=0)
-        RecordMesajı.after(2000, RecordMesajı.destroy)
-    LabelHSV = Label(F2,font="bold")
-    LabelHSV.grid(row=12,column=0,pady=5)
-    LabelHSV.config(cursor="hand2")
-    LabelHSV.bind("<Button-1>", Copy)
-
-def blur_def():
-    global F3
-    global blur
-    global blur2
-    global blur3
-    global blurred
-    global blurred2
-    if F2:
-        F2.grid_forget()
-        F2.destroy()
-    def trgt_scale(event):
-        threading.Thread(target=blrr).start()
-    def trgt_scale2(event):
-        threading.Thread(target=blrr2).start()
-    F3 = Frame(tk)
-    F3.place(x=900,y=50)
-
-    blr_lbl = Label(F3,text="Pixel")
-    blr_lbl.grid(row=0,column=0, sticky=W, padx="100")
-
-    blur = Scale(F3, length=255,variable = v7, from_ = 1, to = 100, troughcolor="red", orient = HORIZONTAL)
-    blur.bind("<ButtonRelease-1>", trgt_scale)
-    blur.grid(row=1,column=0,padx=27)
-
-    blr_lbl2 = Label(F3,text="Renk")
-    blr_lbl2.grid(row=2,column=0, sticky=W, padx="100")
-
-    blur2 = Scale(F3, length=255,variable = v8, from_ = 1, to = 100, troughcolor="white", orient = HORIZONTAL)
-    blur2.bind("<ButtonRelease-1>", trgt_scale)
-    blur2.grid(row=3,column=0,padx=27)
-    
-    blr_lbl3 = Label(F3,text="Renk Uzayı")
-    blr_lbl3.grid(row=4,column=0, sticky=W, padx="100")
-
-    blur3 = Scale(F3, length=255,variable = v9, from_ = 1, to = 100, troughcolor="red", orient = HORIZONTAL)
-    blur3.bind("<ButtonRelease-1>", trgt_scale)
-    blur3.grid(row=5,column=0,padx=27)
-
-    blurred_lbl = Label(F3,text="Sigma X")
-    blurred_lbl.grid(row=6,column=0, sticky=W, padx="100")
-
-    blurred = Scale(F3, length=255,variable = v10, from_ = 1, to = 100, troughcolor="green", orient = HORIZONTAL)
-    blurred.bind("<ButtonRelease-1>", trgt_scale2)
-    blurred.grid(row=7,column=0,padx=27)
-    
-    blurred_lbl2 = Label(F3,text="sigma Y")
-    blurred_lbl2.grid(row=8,column=0, sticky=W, padx="100")
-
-    blurred2 = Scale(F3, length=255,variable = v11, from_ = 1, to = 100, troughcolor="green", orient = HORIZONTAL)
-    blurred2.bind("<ButtonRelease-1>", trgt_scale2)
-    blurred2.grid(row=9,column=0,padx=27)
-
-def blrr2():
-    global orjn
-    saveBTN.config(state="disabled",cursor="")
-
-    blurring = cv2.blur(img_rgb,(blurred.get(),blurred2.get()))
-    orjn = cv2.blur(original,(blurred.get(),blurred2.get()))
-    
-    imgtk3 = ImageTk.PhotoImage(image=Image.fromarray(blurring))
-
-    L2 = Label(F1, image = imgtk3)
-    L2.image = imgtk3
-    L2.grid(row=1, column=1)
-
-    saveBTN.config(state="normal",cursor="hand2")
-
-
-def blrr():
-    global orjn
-
-    saveBTN.config(state="disabled",cursor="")
-
-    bilFilter = cv2.bilateralFilter(img_rgb,blur.get(),blur2.get(),blur3.get())
-    orjn = cv2.bilateralFilter(original,blur.get(),blur2.get(),blur3.get())
-    
-    imgtk3 = ImageTk.PhotoImage(image=Image.fromarray(bilFilter))
-
-    L2 = Label(F1, image = imgtk3)
-    L2.image = imgtk3
-    L2.grid(row=1, column=1)
-
-    saveBTN.config(state="normal",cursor="hand2")
-
-def blurring():
-    global F3
-    global blur
-    global blur2
-    global blur3
-    if F2:
-        F2.grid_forget()
-        F2.destroy()
-    def trgt_scale():
-        threading.Thread(target=blrr).start()
-    F4 = Frame(tk)
-    F4.place(x=900,y=50)
-
-    blr_lbl2 = Label(F4,text="Pixel")
-    blr_lbl2.grid(row=0,column=0, sticky=W, padx="100")
-
-    blur1 = Scale(F4, length=255,variable = v7, from_ = 1, to = 100, troughcolor="red", orient = HORIZONTAL)
-    blur1.bind("<ButtonRelease-1>", trgt_scale)
-    blur1.grid(row=1,column=0,padx=27)
-
-    blr_lbl3 = Label(F4,text="Renk")
-    blr_lbl3.grid(row=2,column=0, sticky=W, padx="100")
-
-    blur2 = Scale(F4, length=255,variable = v8, from_ = 1, to = 100, troughcolor="white", orient = HORIZONTAL)
-    blur2.bind("<ButtonRelease-1>", trgt_scale)
-    blur2.grid(row=3,column=0,padx=27)
-
-def Reset():
-    LabelHSV["text"] = ""
-    L2 = Label(F1, image = tkimage)
-    L2.image = tkimage
-    L2.grid(row=1, column=1)
-    l_h.set(0)
-    l_s.set(0)
-    l_v.set(0)
-    u_h.set(0)
-    u_s.set(0)
-    u_v.set(0)
 
 def Record():
     # Record new image
@@ -297,12 +97,7 @@ def Record():
     RecordMesajı.grid(row=2, column=1,pady=27)
     RecordMesajı.after(2000, RecordMesajı.destroy)
 
-def maske_trgt():
-    threading.Thread(target=new_page).start()
-def blur_trgt():
-    threading.Thread(target=blur_def).start()
-def blur_trgt2():
-    threading.Thread(target=blurring).start()
+
 def trgt2():
     threading.Thread(target=add_image).start()
 def trgt3():
@@ -310,26 +105,21 @@ def trgt3():
 
 def maissa():
     img,lx,ly=readPGM(selected_image)
-    imgtk3=ImageTk.PhotoImage(bruit(img,lx,ly))
-    img,lx,ly=readPGM(selected_image)
+    imgbruit=bruit(img,lx,ly)
+    imgtk3 = ImageTk.PhotoImage(image=Image.fromarray(imgbruit)) 
     L2 = Label(F1, image = imgtk3)
     L2.image = imgtk3
     L2.grid(row=1, column=1)
-    
 
+    
 B1 = Button(tk, text = "Add Image", command=trgt2)
 B1.config(cursor="hand2")
 B1.place(x=180,y=450)
 
-hsv_btn = Button(tk,text="HSV Masking", width = 13, command=maske_trgt)
-hsv_btn.config(cursor="hand2")
-hsv_btn.place(x=800,y=56)
-blur_btn = Button(tk,text="Bilateral Filter", width = 13,command=blur_trgt)
-blur_btn.config(cursor="hand2")
-blur_btn.place(x=800,y=90)
-hsv_btn = Button(tk,text="HSV Masking", width = 13, command=maske_trgt)
-hsv_btn.config(cursor="hand2")
-hsv_btn.place(x=800,y=124)
+
+#hsv_btn.place(x=800,y=56)
+#blur_btn.place(x=800,y=90)
+#hsv_btn.place(x=800,y=124)
 blur_btn = Button(tk,text="maissa", width = 13,command=maissa)
 blur_btn.config(cursor="hand2")
 blur_btn.place(x=800,y=158)
