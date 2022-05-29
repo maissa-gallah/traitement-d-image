@@ -1,11 +1,11 @@
 import cv2 as cv
 import sys
-sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
+sys.path.append("C:/Users/LENOVO/Desktop/my python/traitement-d-image/")
 from  read_write_histogram.readPGM import readPGM
 from read_write_histogram.writePGM import writePGM
 from modificationcontraste import contraste
 
-path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
+path="C:/Users/LENOVO/Desktop/my python/traitement-d-image/images/"
 
 
 img1 = cv.imread(path+'example.pgm') 

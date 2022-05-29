@@ -4,7 +4,7 @@ import sys
 from matplotlib import pyplot as plt
 
 
-sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
+sys.path.append("C:/Users/LENOVO/Desktop/my python/traitement-d-image/")
 from Thresholding.auto_threshholding import otsu
 from Thresholding.manual_thresholding import manual_threshholding
 

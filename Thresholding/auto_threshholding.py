@@ -2,9 +2,9 @@ import cv2 as cv
 import numpy as np
 import sys
 
-sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
+sys.path.append("C:/Users/LENOVO/Desktop/my python/traitement-d-image/")
 
-path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
+path="C:/Users/LENOVO/Desktop/my python/traitement-d-image/images/"
 from Thresholding.histogram import histogram
 from read_write_histogram.histogram import histogram as histo
 

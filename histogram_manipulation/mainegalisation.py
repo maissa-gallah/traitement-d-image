@@ -1,13 +1,13 @@
 
 import numpy as np
 import sys
-sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
+sys.path.append("C:/Users/LENOVO/Desktop/my python/traitement-d-image/")
 from read_write_histogram.histogram import histogram, histogramcumul
 from  read_write_histogram.readPGM import readPGM
 from egalisationh import egalisation
 
 
-path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
+path="C:/Users/LENOVO/Desktop/my python/traitement-d-image/images/"
 
 img , lx ,ly =readPGM(path+"cours.pgm")
 heg=egalisation(img,lx,ly)

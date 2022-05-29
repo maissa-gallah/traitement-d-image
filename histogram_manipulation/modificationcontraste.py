@@ -15,8 +15,8 @@ def function(A,B):
 
 def contraste (img,lx,ly,A,B):
     (a1,b1,a2,b2,a3,b3)=function(A,B)
-    LUT=[0 for i in range (255)]
-    for i in range (255):
+    LUT=[0 for i in range (256)]
+    for i in range (256):
         if i < A[0] :
             LUT[i]=a1*i+b1
         elif i < B[0] :
@@ -24,7 +24,6 @@ def contraste (img,lx,ly,A,B):
         else :
              LUT[i]=a3*i+b3
     imgn=img
-    print(imgn)
     for i in range (ly):
         for j in range (lx):
             imgn[i][j]=LUT[img[i][j]]

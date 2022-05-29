@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 import sys
 
-sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
+sys.path.append("C:/Users/LENOVO/Desktop/my python/traitement-d-image/")
 
 from Thresholding.manual_thresholding import manual_threshholding
 from Thresholding.auto_threshholding import otsu
@@ -13,7 +13,7 @@ from Thresholding.fermeture import fermeture
 from read_write_histogram.readPGM import readPGM
 from read_write_histogram.writePGM import writePGM
 
-path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
+path="C:/Users/LENOVO/Desktop/my python/traitement-d-image/images/"
 
 #---------------------------------------------------------- Manual threshholding
 img = cv.imread(path+'snail.ppm') 

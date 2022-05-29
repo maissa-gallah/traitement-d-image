@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
+sys.path.append("C:/Users/LENOVO/Desktop/my python/traitement-d-image/")
 
 from Thresholding.dilation import dilate_this
 from Thresholding.erosion import erode_this
