@@ -6,7 +6,7 @@ from writePGM import writePGM
 import numpy 
 import math
 
-path="C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/images/"
+path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
 
 print(readPGM(path+"cours.pgm"))
 img , lx ,ly =readPGM(path+"cours.pgm")

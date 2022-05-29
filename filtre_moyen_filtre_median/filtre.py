@@ -33,7 +33,6 @@ def medianFiltre(img, lx, ly, n):
     for i in range (a, ly+a):
         for j in range(a, lx+a):
             arr=img_filled[i-a:i+a+1,j-a:j+a+1]
-            print(i, ",",j)
             new_img[i-a][j-a] = np.median(arr)
     return new_img
 

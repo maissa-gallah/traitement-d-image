@@ -2,10 +2,10 @@ import cv2 as cv
 import numpy as np
 import sys
 
-sys.path.append("C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/")
+sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/")
 
-path="C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/images/"
-from histogram import histogram
+path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
+from Thresholding.histogram import histogram
 from read_write_histogram.histogram import histogram as histo
 
 def otsu(img):

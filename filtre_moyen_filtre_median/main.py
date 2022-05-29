@@ -3,13 +3,13 @@ import cv2 as cv
 import sys
 
 
-sys.path.append("C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/")
+sys.path.append("D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps")
 
 from filtre_moyen_filtre_median.bruit import bruit
 from read_write_histogram.writePGM import writePGM
 from  read_write_histogram.readPGM import readPGM
 from filtre_moyen_filtre_median.filtre import medianFiltre, moyennefilter
-path="C:/Users/LENOVO/Desktop/GL4/semestre 2/Traitement d'images/traitement-d-image/images/"
+path="D:/desktopMaissa/gl4/S2/Traitement d'image/TPGL4/tps/images/"
 
 img1 = cv.imread(path+'coins.pgm') 
 cv.imshow("Test", img1)
